@@ -5,7 +5,7 @@
 3. Parse data grouped by days and by orders using any template engine
 4. Resulting page must not require server connection and usable from mobile devices
 
-Tools used:
+<b>Tools used:</b>
 - Node JS to build the SQL query
 - Nunjucks template engine to parse data
 - JQuery for spoilers
