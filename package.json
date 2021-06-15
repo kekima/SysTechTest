@@ -1,0 +1,21 @@
+{
+  "name": "systechtest",
+  "version": "1.0.0",
+  "description": "SysTech test task for junior JS programmer",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nunjucks": "^3.2.3",
+    "nunjucks-date-filter": "^0.1.1",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app"
+  },
+  "author": "Clever Carrot",
+  "license": "ISC"
+}

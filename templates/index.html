@@ -1,0 +1,62 @@
+{% extends 'partials/layout.njk' %}
+
+{% macro formatDate(date) %}
+    {% set monthNames = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня",
+  "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"] %}
+
+  {{ date | date('DD') }} {{ monthNames[(date | date('M')) - 1] }} {{ date | date('YYYY') }}
+
+{% endmacro %}
+
+
+{% block content %} 
+
+<div class="container">
+
+    {% for index, day in ordersByDay %}
+
+        <div class="new-date">
+            <div class="top-of-new-date">
+                <div>{{ formatDate(day.orders[0].date) }} </div>
+                <div>Документов: {{ day.orders.length }} ({{ day.totalAmount.toFixed(2) }} &#8381;)</div>
+            </div>
+            <div class="orders">
+
+                {% for order in day.orders %}
+                    <div class="single-order">
+                        <div class="order-title">
+                        <div>{{ order.type }} - №{{ order.id }}</div>
+                        <div>{{ order.totalAmount.toFixed(2) }}  &#8381;</div>
+                    </div>
+                        <div class="count-goods-per-order">Товаров: {{ order.items.length }}</div>
+                        <div class="items">
+                            {% for item in order.items %}
+                                <div class="item">
+                                    <img src="{{ item.image or 'default-image.svg' }}" alt="" />
+                                    <b>{{ item.name }}</b>
+                                    <div>{{ item.quantity }} шт. &times; {{ item.price }} &#8381; &mdash; {{ (item.quantity * item.price) | round(2, 'ceil') }} &#8381;</div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+
+    <script>
+        
+        $('.top-of-new-date').click(function() {
+            $(this).next('.orders').toggle('fast');
+        });
+
+        $('.single-order').click(function(e) {
+            e.stopPropagation();
+            $(this).children('.items').toggle('fast');
+        });
+
+    </script>
+
+{% endblock %}
